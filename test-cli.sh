@@ -11,4 +11,4 @@ assert() {
   exit 1
 }
 
-assert "$(naughtty --version)" "${CIRCLE_TAG:-"-1.-1.-1"}"
+assert "$(naughtty --version)" "naughtty v${CIRCLE_TAG:-"-1.-1.-1"}"
