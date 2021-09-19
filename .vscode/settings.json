@@ -1,5 +1,11 @@
 {
   "cSpell.words": [
-    "naughtty"
+    "epilog",
+    "execvpe",
+    "fcntl",
+    "ioctl",
+    "naughtty",
+    "struct",
+    "TIOCSWINSZ"
   ]
 }

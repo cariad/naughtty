@@ -1,3 +1,5 @@
-from naughtty.version import get_version
+from naughtty.naughtty import NaughTTY
 
-__all__ = ["get_version"]
+__all__ = [
+    "NaughTTY",
+]

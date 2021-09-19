@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+ansiscape = "==1.0.0a1"
 black = "==21.9b0"
 flake8 = "*"
 isort = "*"

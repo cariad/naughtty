@@ -1,9 +1,9 @@
-from naughtty import get_version
-
-
 def cli_entry() -> None:
-    print(f"naughtty v{get_version()}")
+    from naughtty.cli import make_response
+
+    print(make_response())
 
 
 if __name__ == "__main__":
+
     cli_entry()

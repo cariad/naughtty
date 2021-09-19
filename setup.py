@@ -2,7 +2,7 @@ from pathlib import Path
 
 from setuptools import setup  # pyright: reportMissingTypeStubs=false
 
-from naughtty import get_version
+from naughtty.version import get_version
 
 readme_path = Path(__file__).parent / "README.md"
 
@@ -13,7 +13,7 @@ classifiers = [
     "Environment :: Console",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
-    "Operating System :: OS Independent",
+    "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -36,7 +36,7 @@ setup(
     author="Cariad Eccleston",
     author_email="cariad@cariad.io",
     classifiers=classifiers,
-    description="CLI tool and Python package for running a pseudo terminal",
+    description="Python package and CLI tool for executing shell commands in a pseudo-terminal",
     entry_points={
         "console_scripts": [
             "naughtty=naughtty.__main__:cli_entry",
