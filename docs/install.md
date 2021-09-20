@@ -7,4 +7,4 @@ pip install naughtty
 ```
 
 !!! warning
-    NaughTTY requires the host operating system to support pseudo-terminals. GNU/Linux is good. At the time of writing, Windows is not. No guarantees are made for any operating system.
+    NaughTTY requires the host operating system to support forking and pseudo-terminals. GNU/Linux is good. At the time of writing, Windows is not. No guarantees are made for any operating system.
