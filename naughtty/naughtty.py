@@ -20,10 +20,10 @@ class NaughTTY:
                           (default=naughtty.constants.DEFAULT_CHARACTER_PIXELS)
 
         columns:          Pseudo-terminal column count (default=current or
-                          naughtty.constants.DEFAULT_TERMINAL_COLUMNS)
+                          naughtty.constants.DEFAULT_TERMINAL_SIZE[0])
 
-        rows:             Pseudo-terminal row count (default=current or
-                          naughtty.constants.DEFAULT_TERMINAL_ROWS)
+        lines:            Pseudo-terminal line count (default=current or
+                          naughtty.constants.DEFAULT_TERMINAL_SIZE[1])
     """
 
     def __init__(
@@ -31,7 +31,7 @@ class NaughTTY:
         command: List[str],
         character_pixels: Optional[Tuple[int, int]] = None,
         columns: Optional[int] = None,
-        rows: Optional[int] = None,
+        lines: Optional[int] = None,
     ) -> None:
 
         current_terminal_size = get_terminal_size(DEFAULT_TERMINAL_SIZE)
@@ -42,7 +42,7 @@ class NaughTTY:
         self.command = command
         self.terminal_size = (
             columns or current_terminal_size.columns,
-            rows or current_terminal_size.lines,
+            lines or current_terminal_size.lines,
         )
 
     def execute(self) -> None:

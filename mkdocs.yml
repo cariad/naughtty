@@ -1,0 +1,11 @@
+markdown_extensions:
+  - admonition
+nav:
+  - index.md
+  - install.md
+  - cli.md
+  - python.md
+  - about.md
+site_name: NaughTTY
+theme:
+  name: readthedocs
