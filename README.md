@@ -59,7 +59,7 @@ Usage: \033[39m\033[1mpipenv\033[39m\033[22m [OPTIONS] COMMAND [ARGS]...
 
 Full documentation is published at [naughtty.readthedocs.io](https://naughtty.readthedocs.io).
 
-## The Author
+## 👋 Hello!
 
 **Hello!** I'm [Cariad Eccleston](https://cariad.io) and I'm an independent/freelance software engineer. If my work has value to you, please consider [sponsoring](https://github.com/sponsors/cariad/).
 
