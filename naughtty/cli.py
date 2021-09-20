@@ -11,15 +11,15 @@ def make_naughtty(ns: Namespace) -> NaughTTY:
 
     character_pixels: Optional[Tuple[int, int]] = None
 
-    if ns.char:
-        parts = str(ns.char).split(",")
+    if ns.character_pixels:
+        parts = str(ns.character_pixels).split(",")
         character_pixels = (int(parts[0]), int(parts[1]))
 
     return NaughTTY(
-        columns=int(ns.cols) if ns.cols else None,
+        columns=int(ns.columns) if ns.columns else None,
         command=ns.command,
-        rows=int(ns.rows) if ns.rows else None,
         character_pixels=character_pixels,
+        lines=int(ns.lines) if ns.lines else None,
     )
 
 
@@ -37,21 +37,21 @@ def make_response(cli_args: Optional[List[str]] = None) -> str:
     parser.add_argument("command", help="command", nargs="*")
 
     parser.add_argument(
-        "--char",
+        "--character-pixels",
         help=f"character size in pixels (default={DEFAULT_CHARACTER_PIXELS[0]},{DEFAULT_CHARACTER_PIXELS[1]})",
         metavar="WIDTH,HEIGHT",
     )
 
     parser.add_argument(
-        "--cols",
+        "--columns",
         help=f"columns (default=system default or {DEFAULT_TERMINAL_SIZE[0]})",
     )
 
     parser.add_argument("--help", action="store_true", help="print this help")
 
     parser.add_argument(
-        "--rows",
-        help=f"rows (default=system default or {DEFAULT_TERMINAL_SIZE[1]})",
+        "--lines",
+        help=f"lines (default=system default or {DEFAULT_TERMINAL_SIZE[1]})",
     )
 
     parser.add_argument(

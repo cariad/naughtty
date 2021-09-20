@@ -6,10 +6,10 @@ from naughtty.cli import make_naughtty, make_response
 def test_make_naughtty__custom() -> None:
     naughtty = make_naughtty(
         Namespace(
-            char="5,6",
-            cols="3",
+            character_pixels="5,6",
+            columns="3",
             command=["python", "tests/out-color.py"],
-            rows="4",
+            lines="4",
         )
     )
 
@@ -21,10 +21,10 @@ def test_make_naughtty__custom() -> None:
 def test_make_naughtty__defaults() -> None:
     naughtty = make_naughtty(
         Namespace(
-            char=None,
-            cols=None,
+            character_pixels=None,
+            columns=None,
             command=["python", "tests/out-color.py"],
-            rows=None,
+            lines=None,
         )
     )
 
