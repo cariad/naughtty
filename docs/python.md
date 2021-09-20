@@ -13,9 +13,9 @@ print(ntty.output)
 ```
 
 ```text
-Usage: [39m[1mpipenv[39m[22m [OPTIONS] COMMAND [ARGS]...
+Usage: \033[39m\033[1mpipenv\033[39m\033[22m [OPTIONS] COMMAND [ARGS]...
 
-[39m[1mOptions:[39m[22m
+\033[39m\033[1mOptions:\033[39m\033[22m
   --where                         Output project home information.
   --venv                          Output virtualenv information.
   --py                            Output Python interpreter information.
@@ -23,7 +23,7 @@ Usage: [39m[1mpipenv[39m[22m [OPTIONS] COMMAND [ARGS]...
   --rm                            Remove the virtualenv.
   --bare                          Minimal output.
   --completion                    Output completion (to be executed by the
-                                [33m[1m  shell[39m[22m).
+                                \033[33m\033[1m  shell\033[39m\033[22m).
 ...
 ```
 
