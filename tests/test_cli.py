@@ -53,7 +53,7 @@ def test_make_response__for_execution__with_help() -> None:
 def test_make_response__for_help() -> None:
     response = make_response(["--help"])
     assert response.startswith("usage: ")
-    assert response.endswith("naughtty pipenv --help > out.txt\n")
+    assert response.endswith("Eccleston: https://github.com/cariad/naughtty\n")
     assert "naughtty" in response
 
 
