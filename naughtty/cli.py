@@ -31,7 +31,7 @@ def make_response(cli_args: Optional[List[str]] = None) -> str:
         # command's arguments:
         add_help=False,
         description="Executes a shell command in a pseudo-terminal and prints its output to stdout.",
-        epilog="For example: naughtty pipenv --help > out.txt",
+        epilog="Made with love by Cariad Eccleston: https://github.com/cariad/naughtty",
     )
 
     parser.add_argument("command", help="command", nargs="*")
