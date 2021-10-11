@@ -1,9 +1,34 @@
 from argparse import ArgumentParser, Namespace
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 
 from naughtty.constants import DEFAULT_CHARACTER_PIXELS, DEFAULT_TERMINAL_SIZE
 from naughtty.naughtty import NaughTTY
 from naughtty.version import get_version
+
+
+def make_namespace(cli_args: List[str]) -> Namespace:
+    """Reads `cli_args` into a `Namespace`."""
+
+    # We need to perform our own strict left-to-right reading of the arguments
+    # because `ArgumentParser` can't tell if any "--help" or "--version" is
+    # intended for us or the child command.
+
+    wip: Dict[str, Union[bool, str, List[str]]] = {}
+    name: Optional[str] = None
+
+    for index, arg in enumerate(cli_args):
+        if arg.startswith("--"):
+            name = arg[2:].replace("-", "_")
+            wip[name] = True
+        else:
+            if name:
+                wip[name] = arg
+                name = None
+            else:
+                wip["command"] = cli_args[index:]
+                break
+
+    return Namespace(**wip)
 
 
 def make_naughtty(ns: Namespace) -> NaughTTY:
@@ -11,25 +36,22 @@ def make_naughtty(ns: Namespace) -> NaughTTY:
 
     character_pixels: Optional[Tuple[int, int]] = None
 
-    if ns.character_pixels:
+    if "character_pixels" in ns:
         parts = str(ns.character_pixels).split(",")
         character_pixels = (int(parts[0]), int(parts[1]))
 
     return NaughTTY(
-        columns=int(ns.columns) if ns.columns else None,
+        columns=int(ns.columns) if "columns" in ns else None,
         command=ns.command,
         character_pixels=character_pixels,
-        lines=int(ns.lines) if ns.lines else None,
+        lines=int(ns.lines) if "lines" in ns else None,
     )
 
 
-def make_response(cli_args: Optional[List[str]] = None) -> str:
+def make_response(cli_args: List[str]) -> str:
     """Makes a response to the given command line arguments."""
 
     parser = ArgumentParser(
-        # We don't want ArgumentParser to pick up on "--help" in the child
-        # command's arguments:
-        add_help=False,
         description="Executes a shell command in a pseudo-terminal and prints its output to stdout.",
         epilog="Made with love by Cariad Eccleston: https://github.com/cariad/naughtty",
     )
@@ -47,8 +69,6 @@ def make_response(cli_args: Optional[List[str]] = None) -> str:
         help=f"columns (default=system default or {DEFAULT_TERMINAL_SIZE[0]})",
     )
 
-    parser.add_argument("--help", action="store_true", help="print this help")
-
     parser.add_argument(
         "--lines",
         help=f"lines (default=system default or {DEFAULT_TERMINAL_SIZE[1]})",
@@ -60,14 +80,12 @@ def make_response(cli_args: Optional[List[str]] = None) -> str:
         help="print the version",
     )
 
-    args = parser.parse_args(cli_args)
+    args = make_namespace(cli_args)
 
-    if args.version:
+    if "version" in args:
         return get_version()
 
-    # If we discover "--help" AND a command then that "--help" is intended for
-    # the command and not us:
-    if not args.command or (args.help and not args.command):
+    if "command" not in args or "help" in args:
         return parser.format_help()
 
     n = make_naughtty(args)
