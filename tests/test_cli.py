@@ -1,6 +1,24 @@
 from argparse import Namespace
+from typing import List
 
-from naughtty.cli import make_naughtty, make_response
+from pytest import mark
+
+from naughtty.cli import make_namespace, make_naughtty, make_response
+
+
+@mark.parametrize(
+    "args, expect",
+    [
+        ([], Namespace()),
+        (["--help"], Namespace(help=True)),
+        (["pipenv", "--help"], Namespace(command=["pipenv", "--help"])),
+        (["--lines", "30"], Namespace(lines="30")),
+        (["--lines", "30", "foo"], Namespace(command=["foo"], lines="30")),
+        (["foo", "--lines", "30"], Namespace(command=["foo", "--lines", "30"])),
+    ],
+)
+def test_make_namespace(args: List[str], expect: Namespace) -> None:
+    assert make_namespace(args) == expect
 
 
 def test_make_naughtty__custom() -> None:
@@ -21,10 +39,7 @@ def test_make_naughtty__custom() -> None:
 def test_make_naughtty__defaults() -> None:
     naughtty = make_naughtty(
         Namespace(
-            character_pixels=None,
-            columns=None,
             command=["python", "tests/out-color.py"],
-            lines=None,
         )
     )
 
